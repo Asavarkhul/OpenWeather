@@ -11,7 +11,8 @@ import UIKit
 public final class Appearence {
     static func customize() {
         UINavigationBar.appearance().barTintColor = UIColor.appBlue()
-        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         UILabel.appearance().textColor = UIColor.white
@@ -75,15 +76,5 @@ public extension UIColor {
             self.init()
             return nil
         }
-    }
-}
-
-extension UIFont {
-    static func cellTitleFont() -> UIFont {
-        return UIFont.systemFont(ofSize: 13)
-    }
-    
-    static func cellValueFont() -> UIFont {
-        return UIFont.boldSystemFont(ofSize: 18)
     }
 }
