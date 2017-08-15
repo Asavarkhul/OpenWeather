@@ -11,7 +11,6 @@ import ObjectMapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     
     class func sharedDelegate() -> AppDelegate {

@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 public extension UITableView {
-    
     /**
      Returns a reusable table-view cell object located by its Class.
      
@@ -21,10 +20,28 @@ public extension UITableView {
     public func dequeueReusableCellWithClass<T: UITableViewCell>(_ cellClass: T.Type) -> T {
         return self.dequeueReusableCell(withIdentifier: cellClass.defaultReuseIdentifier()) as! T
     }
+    
+    /**
+     Shortcut for registerNib:forCellReuseIdentifier: which uses the value returned by defaultReuseIdentifier for the reuse identifier.
+     
+     - parameter UITableViewCell.Type: A class which is a subclass of UITableViewCell.
+     */
+    public func registerNib(name nibName: String, cellClass: UITableViewCell.Type) {
+        let nib = UINib(nibName: nibName, bundle: Bundle(for: cellClass))
+        self.register(nib, forCellReuseIdentifier: cellClass.defaultReuseIdentifier())
+    }
+    
+    /**
+     Shortcut for registerNib:forCellReuseIdentifier: which uses the value returned by defaultReuseIdentifier for the reuse identifier.
+     
+     - parameter UITableViewCell.Type: A class which is a subclass of UITableViewCell.
+     */
+    public func registerNib(cellClass: UITableViewCell.Type) {
+        self.registerNib(name: cellClass.defaultReuseIdentifier(), cellClass: cellClass)
+    }
 }
 
 public extension UICollectionView {
-    
     /**
      Returns a reusable collection-view cell object located by its Class.
      
@@ -37,10 +54,28 @@ public extension UICollectionView {
     public func dequeueReusableCellWithClass<T: UICollectionViewCell>(_ cellClass: T.Type, forIndexPath indexPath: IndexPath) -> T {
         return self.dequeueReusableCell(withReuseIdentifier: cellClass.defaultReuseIdentifier(), for: indexPath) as! T
     }
+    
+    /**
+     Shortcut for registerNib:forCellWithReuseIdentifier: which uses the value returned by defaultReuseIdentifier for the reuse identifier.
+     
+     - parameter UICollectionViewCell: A class which is a subclass of UICollectionViewCell.
+     */
+    public func registerNib(name nibName: String, cellClass: UICollectionViewCell.Type) {
+        let nib = UINib(nibName: nibName, bundle: Bundle(for: cellClass))
+        self.register(nib, forCellWithReuseIdentifier: cellClass.defaultReuseIdentifier())
+    }
+    
+    /**
+     Shortcut for registerNib:forCellWithReuseIdentifier: which uses the value returned by defaultReuseIdentifier for the reuse identifier.
+     
+     - parameter UICollectionViewCell: A class which is a subclass of UICollectionViewCell.
+     */
+    public func registerNib(cellClass: UICollectionViewCell.Type) {
+        self.registerNib(name: cellClass.defaultReuseIdentifier(), cellClass: cellClass)
+    }
 }
 
 public extension UITableViewCell {
-    
     /**
      A default reuse identifier for queuing in UITableView
      
@@ -52,7 +87,6 @@ public extension UITableViewCell {
 }
 
 public extension UICollectionViewCell {
-    
     /**
      A default reuse identifier for queuing in UITableView
      

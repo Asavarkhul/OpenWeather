@@ -22,7 +22,9 @@ extension BindableType where Self: UIViewController {
         viewModel = model
         if #available(iOS 9.0, *) {
             loadViewIfNeeded()
-        } 
+        } else {
+            _ = self.view
+        }
         bindViewModel()
     }
 }

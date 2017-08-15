@@ -10,6 +10,7 @@ import UIKit
 
 public final class Appearence {
     static func customize() {
+        UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().barTintColor = UIColor.appBlue()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().isTranslucent = true

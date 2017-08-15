@@ -15,27 +15,23 @@ import RxDataSources
 
 class Condition: Object, Mappable {
     // MARK: - Properties
+    dynamic var uid: Int = 0
     dynamic var identifier: Int64 = 0
-    dynamic var title = ""
-    dynamic var comment = ""
-    dynamic var iconURL = ""
-    
+    dynamic var title: String = ""
+    dynamic var comment: String = ""
+    dynamic var iconURL: String = ""
     dynamic var temperature: Double = 0.0
     dynamic var minTemperature: Double = 0.0
     dynamic var maxTemperature: Double = 0.0
-    
     dynamic var windSpeed: Double = 0.0
-    dynamic var windName = ""
-    
+    dynamic var windName: String = ""
     dynamic var precipitation: Double = 0.0
-    dynamic var precipitationType = ""
-    
+    dynamic var precipitationType: String = ""
     dynamic var pressure: Double = 0.0
     dynamic var humidity: Double = 0.0
     
-    //MARK: - Meta
-    override static func primaryKey() -> String? {
-        return "identifier"
+    override class func primaryKey() -> String? {
+        return "uid"
     }
     
     // MARK: Mappable
@@ -66,6 +62,22 @@ class Condition: Object, Mappable {
 
 extension Condition: IdentifiableType {
     var identity: Int {
-        return self.identifier.hashValue
+        return self.isInvalidated ? 0 : uid
+    }
+}
+
+extension Condition {
+    static func loadCurrentCondition(for city: City, success:@escaping (_ condition: Condition) -> Void) {
+        Alamofire.request(OpenWeatherRouter.current(cityId: city.identifier, units: .Metric))
+            .responseJSON() { response in
+                guard let jsonResponse = response.result.value else {
+                    return
+                }
+                
+                guard let condition = Mapper<Condition>().map(JSON: jsonResponse as! [String : Any]) else {
+                    return
+                }
+                success(condition)
+        }
     }
 }
