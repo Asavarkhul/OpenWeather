@@ -19,6 +19,10 @@ class Forecast: Object, Mappable {
     dynamic var date: Date?
     dynamic var day: String = ""
     dynamic var temperature: Double = 0.0
+    dynamic var minTemperature: Double = 0.0
+    dynamic var maxTemperature: Double = 0.0
+    dynamic var cloudiness: Int = 0
+    dynamic var windSpeed: Int = 0
     dynamic var uid: String = ""
     
     override class func primaryKey() -> String? {
@@ -30,18 +34,15 @@ class Forecast: Object, Mappable {
         self.init()
     }
     
-    let dateformatter: DateFormatter = {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "MM-dd-yyyy"
-        dateformatter.timeZone = TimeZone(identifier: "GMT")
-        return dateformatter
-    }()
-    
     func mapping(map: Map) {
         comment <- map["weather.0.description"]
         iconURL <- (map["weather.0.icon"], IconURLTransformer())
         date <- (map["dt"], DateTransform())
         temperature <- map["main.temp"]
+        minTemperature <- map["main.temp_min"]
+        maxTemperature <- map["main.temp_max"]
+        cloudiness <- map["clouds.all"]
+        windSpeed <- map["wind.speed"]
     }
 }
 

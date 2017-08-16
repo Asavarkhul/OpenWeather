@@ -29,7 +29,14 @@ public struct HomeViewModel {
         self.cityService = CityService(for: city)
     }
     
-    var conditions: Observable<[ConditionSection]> {
+    var conditions: Observable<[Condition]> {
+        return self.conditionService.conditions()
+            .map { result in
+                return result.toArray()
+        }
+    }
+    
+    var conditionSections: Observable<[ConditionSection]> {
         return self.conditionService.conditions()
             .map { results in
                 return [
@@ -38,27 +45,19 @@ public struct HomeViewModel {
         }
     }
     
-    var forecasts: Observable<[ForecastsSection]> {
-        return self.forecastService.forecasts()
-            .map { results in
-                return [
-                    ForecastsSection(model: "Forcasts", items: results.toArray())
-                ]
-        }
-    }
-    
-    var forecastsForNextFiveDays: Observable<[ForecastsSection]> {
+    var forecastsForNextFiveDaysSection: Observable<[ForecastsSection]> {
         return self.forecastService.forecasts()
             .map { results in
                 var forecasts: [Forecast] = []
                 let forecastsFromResult = results.toArray()
-                
-                forecastsFromResult.forEach { (p) -> () in
-                    if !forecasts.contains(where: { $0.day == p.day }) {
-                        forecasts.append(p)
+                let today = dayFormat.string(from: Date())
+                forecastsFromResult.forEach { (forecast) -> () in
+                    if !forecasts.contains(where: { $0.day == forecast.day }) {
+                        if forecast.day != today {
+                            forecasts.append(forecast)
+                        }
                     }
                 }
-                
                 return [
                     ForecastsSection(model: "Forcasts", items: forecasts)
                 ]

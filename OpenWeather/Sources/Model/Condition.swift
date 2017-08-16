@@ -73,7 +73,6 @@ extension Condition {
                 guard let jsonResponse = response.result.value else {
                     return
                 }
-                
                 guard let condition = Mapper<Condition>().map(JSON: jsonResponse as! [String : Any]) else {
                     return
                 }

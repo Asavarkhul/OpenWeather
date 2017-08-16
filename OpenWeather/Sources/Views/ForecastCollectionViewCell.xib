@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
+        <array key="weather.ttf">
+            <string>Flaticon</string>
         </array>
     </customFonts>
     <objects>
@@ -28,26 +28,26 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Sam-m8-nLC"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather-tstorm" translatesAutoresizingMaskIntoConstraints="NO" id="h6i-3P-5yW">
-                        <rect key="frame" x="35" y="35" width="29" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwS-dh-tyO">
+                        <rect key="frame" x="33" y="31" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="29" id="Pp5-VD-Dyc"/>
-                            <constraint firstAttribute="width" constant="29" id="uKT-d9-0Il"/>
+                            <constraint firstAttribute="height" constant="32" id="U4t-5y-kRx"/>
+                            <constraint firstAttribute="width" constant="32" id="W6H-dg-HWx"/>
                         </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOV-aV-zKd">
-                        <rect key="frame" x="8" y="70.5" width="31.5" height="16.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="Flaticon" family="Flaticon" pointSize="26"/>
                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34L-5A-R6m">
-                        <rect key="frame" x="58.5" y="70.5" width="31.5" height="16.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                        <rect key="frame" x="34.5" y="72" width="31" height="16.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16.5" id="jBT-2d-mGJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -55,29 +55,21 @@
             </view>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.078178879310000005" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="h6i-3P-5yW" firstAttribute="centerX" secondItem="Ncc-u5-BN9" secondAttribute="centerX" id="2vW-6E-n9H"/>
+                <constraint firstItem="34L-5A-R6m" firstAttribute="centerX" secondItem="Ncc-u5-BN9" secondAttribute="centerX" id="3UE-Lb-Cwk"/>
                 <constraint firstAttribute="trailing" secondItem="MH3-o2-c2s" secondAttribute="trailing" constant="8" id="5wA-V9-uro"/>
                 <constraint firstItem="MH3-o2-c2s" firstAttribute="leading" secondItem="Ncc-u5-BN9" secondAttribute="leading" constant="8" id="WqO-rh-zRf"/>
-                <constraint firstItem="sOV-aV-zKd" firstAttribute="leading" secondItem="Ncc-u5-BN9" secondAttribute="leading" constant="8" id="Z1w-K8-m8O"/>
-                <constraint firstAttribute="trailing" secondItem="34L-5A-R6m" secondAttribute="trailing" constant="8" id="cVa-W9-bbC"/>
-                <constraint firstAttribute="bottom" secondItem="sOV-aV-zKd" secondAttribute="bottom" constant="8" id="gk9-1h-J3C"/>
-                <constraint firstItem="34L-5A-R6m" firstAttribute="width" secondItem="sOV-aV-zKd" secondAttribute="width" id="qP0-Ai-r6y"/>
-                <constraint firstItem="34L-5A-R6m" firstAttribute="centerY" secondItem="sOV-aV-zKd" secondAttribute="centerY" id="sql-su-khA"/>
+                <constraint firstAttribute="bottom" secondItem="34L-5A-R6m" secondAttribute="bottom" constant="6.5" id="YG8-hD-Wps"/>
+                <constraint firstItem="GwS-dh-tyO" firstAttribute="centerY" secondItem="Ncc-u5-BN9" secondAttribute="centerY" id="gci-Qx-E7D"/>
                 <constraint firstItem="MH3-o2-c2s" firstAttribute="top" secondItem="Ncc-u5-BN9" secondAttribute="top" constant="8" id="tnv-qH-4o2"/>
-                <constraint firstItem="h6i-3P-5yW" firstAttribute="top" secondItem="MH3-o2-c2s" secondAttribute="bottom" constant="6" id="vhg-tq-5W1"/>
-                <constraint firstItem="34L-5A-R6m" firstAttribute="height" secondItem="sOV-aV-zKd" secondAttribute="height" id="wXA-mj-i0N"/>
+                <constraint firstItem="GwS-dh-tyO" firstAttribute="centerX" secondItem="Ncc-u5-BN9" secondAttribute="centerX" id="zf7-2u-TaX"/>
             </constraints>
             <size key="customSize" width="98" height="95"/>
             <connections>
                 <outlet property="dayLabel" destination="MH3-o2-c2s" id="Rb8-Kp-UMs"/>
-                <outlet property="tempMaxLabel" destination="34L-5A-R6m" id="zcw-15-kzo"/>
-                <outlet property="tempMinLabel" destination="sOV-aV-zKd" id="fOi-M2-InY"/>
-                <outlet property="weatherImage" destination="h6i-3P-5yW" id="cAT-bs-d56"/>
+                <outlet property="tempLabel" destination="34L-5A-R6m" id="s1d-8k-bBM"/>
+                <outlet property="weatherIconLabel" destination="GwS-dh-tyO" id="DUg-pm-8PZ"/>
             </connections>
             <point key="canvasLocation" x="623" y="414.5"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="weather-tstorm" width="32" height="32"/>
-    </resources>
 </document>

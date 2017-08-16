@@ -12,8 +12,7 @@ public final class Appearence {
     static func customize() {
         UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().barTintColor = UIColor.appBlue()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         UILabel.appearance().textColor = UIColor.white
@@ -23,6 +22,10 @@ public final class Appearence {
 extension UIColor {
     static func appBlue() -> UIColor {
         return UIColor(hex: "49B9FA")
+    }
+    
+    static func darkBlue() -> UIColor {
+        return UIColor(hex: "4D82E7")
     }
 }
 

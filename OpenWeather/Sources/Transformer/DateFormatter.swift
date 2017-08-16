@@ -12,7 +12,35 @@ public var fullDateFormat: DateFormatter {
     struct Static {
         static let instance : DateFormatter = {
             let formatter = DateFormatter()
+            formatter.timeZone = TimeZone(identifier: "GMT")
             formatter.dateStyle = .full
+            formatter.locale = Locale(identifier: "en_US")
+            return formatter
+        }()
+    }
+    return Static.instance
+}
+
+public var literalDayFormat: DateFormatter {
+    struct Static {
+        static let instance : DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.timeZone = TimeZone(identifier: "GMT")
+            formatter.dateFormat = "EEE"
+            formatter.locale = Locale(identifier: "en_US")
+            return formatter
+        }()
+    }
+    return Static.instance
+}
+
+public var literalDayFullFormat: DateFormatter {
+    struct Static {
+        static let instance : DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.timeZone = TimeZone(identifier: "GMT")
+            formatter.dateFormat = "EEEE"
+            formatter.locale = Locale(identifier: "en_US")
             return formatter
         }()
     }
@@ -23,8 +51,9 @@ public var dayFormat: DateFormatter {
     struct Static {
         static let instance : DateFormatter = {
             let formatter = DateFormatter()
-            formatter.dateFormat = "dd"
             formatter.timeZone = TimeZone(identifier: "GMT")
+            formatter.dateFormat = "dd"
+            formatter.locale = Locale(identifier: "en_US")
             return formatter
         }()
     }

@@ -96,3 +96,55 @@ public extension UICollectionViewCell {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
 }
+
+extension UICollectionViewFlowLayout {
+    
+    /**
+     Calculates an item size that will meets the given ratio/length requirements inside the flow.
+     This function also takes in account parameters of the flow such as scrollDirection, minimumInteritemSpacing, and sectionInsets in order to calculates the best item size.
+     
+     - parameter ratio: A ratio wich the item size should be constrained to.
+     - parameter itemLengthRange: A range representing the min & max length that an item can have. Use Int.max for no limit, or use nil to display 1 item per line or column.
+     
+     - returns: An item size that meets both ratio & min/max values provided.
+     
+     'length' here means the width OR the height of an item. The function tranlates the given length range to a width value if the flow layout's scrollDirection is set to Vertical, because you need to fit the items in the available width inside the UICollectionView, not the height. Length because height if we're in an Horizontal scroll direction.
+     */
+    public func itemSizeThatFits(constrainedToRatio ratio: CGFloat, andConstrainedToLength itemLengthRange: CountableRange<Int>?) -> CGSize {
+        if let collectionView = self.collectionView {
+            
+            let availableBounds: CGRect = collectionView.frame - collectionView.contentInset
+            let sectionInsetsLength: Int = Int(self.scrollDirection == .horizontal ? self.sectionInset.top + self.sectionInset.bottom : self.sectionInset.left + self.sectionInset.right)
+            let availableLength: Int = Int(self.scrollDirection == .horizontal ? availableBounds.height : availableBounds.width) - sectionInsetsLength
+            
+            var itemLength = itemLengthRange?.startIndex ?? availableLength
+            var numberOfItems: Int = 1
+            var currentInteritemSpacing: CGFloat = 0.0
+            
+            if let range = itemLengthRange {
+                repeat {
+                    if itemLength >= range.endIndex-1 || itemLength >= availableLength {
+                        break
+                    }else {
+                        itemLength += 1
+                    }
+                    
+                    numberOfItems = availableLength / itemLength
+                    let remainder = CGFloat(availableLength) - CGFloat(itemLength * numberOfItems)
+                    currentInteritemSpacing = (remainder / CGFloat(numberOfItems-1))
+                    
+                    
+                } while floor(currentInteritemSpacing) > self.minimumInteritemSpacing+1
+                
+                if itemLength >= availableLength {
+                    itemLength = availableLength
+                }
+            }
+            return CGSize(
+                width: self.scrollDirection == .vertical ? CGFloat(itemLength) : ceil(CGFloat(itemLength) * ratio),
+                height: self.scrollDirection == .horizontal ? CGFloat(itemLength) : ceil(CGFloat(itemLength) / (ratio * 2))
+            )
+        }
+        return CGSize.zero
+    }
+}

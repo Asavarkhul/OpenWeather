@@ -27,7 +27,6 @@ struct ConditionService {
     @discardableResult
     func conditions() -> Observable<Results<Condition>> {
         let result = withRealm("Getting conditions") { realm -> Observable<Results<Condition>> in
-            let realm = try Realm()
             let conditions = realm.objects(Condition.self)
             return Observable.collection(from: conditions)
         }
