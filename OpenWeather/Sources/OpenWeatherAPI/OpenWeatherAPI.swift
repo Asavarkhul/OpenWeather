@@ -8,16 +8,14 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 import Alamofire
-import RxAlamofire
 
-public let okRequestStatusCode: Int = 200
-public let multipleChoicesStatusCode: Int = 300
-public let badRequestStatusCode: Int = 400
-public let unauthorizedStatusCode: Int = 401
-public let internalServerErrorStatusCode: Int = 500
-public let serverErrorStatusCode: Int = 600
+fileprivate let okRequestStatusCode: Int = 200
+fileprivate let multipleChoicesStatusCode: Int = 300
+fileprivate let badRequestStatusCode: Int = 400
+fileprivate let unauthorizedStatusCode: Int = 401
+fileprivate let internalServerErrorStatusCode: Int = 500
+fileprivate let serverErrorStatusCode: Int = 600
 
 // MARK: - Units
 public enum Units: String {

@@ -18,9 +18,8 @@ class Forecast: Object, Mappable {
     dynamic var iconURL: String = ""
     dynamic var date: Date?
     dynamic var day: String = ""
+    dynamic var hour: String = ""
     dynamic var temperature: Double = 0.0
-    dynamic var minTemperature: Double = 0.0
-    dynamic var maxTemperature: Double = 0.0
     dynamic var cloudiness: Int = 0
     dynamic var windSpeed: Int = 0
     dynamic var uid: String = ""
@@ -39,8 +38,6 @@ class Forecast: Object, Mappable {
         iconURL <- (map["weather.0.icon"], IconURLTransformer())
         date <- (map["dt"], DateTransform())
         temperature <- map["main.temp"]
-        minTemperature <- map["main.temp_min"]
-        maxTemperature <- map["main.temp_max"]
         cloudiness <- map["clouds.all"]
         windSpeed <- map["wind.speed"]
     }
@@ -49,6 +46,45 @@ class Forecast: Object, Mappable {
 extension Forecast: IdentifiableType {
     var identity: Date {
         return self.date ?? Date()
+    }
+}
+
+extension Forecast {
+    static func filter(_ forecasts: [Forecast], for day: String) -> [Forecast]? {
+        var localForecasts: [Forecast] = []
+        forecasts.forEach { forecast -> () in
+            if forecast.day == day {
+                localForecasts.append(forecast)
+            }
+        }
+        return localForecasts
+    }
+    
+    static func filterFromTomorrow(_ forecasts: [Forecast]) -> [Forecast]? {
+        var localForecasts: [Forecast] = []
+        forecasts.forEach { forecast -> Void in
+            if !localForecasts.contains(where: { $0.day == forecast.day }) {
+                guard let noonForecast = forecast.forNoon() else {
+                    return
+                }
+                localForecasts.append(noonForecast)
+            }
+        }
+        return localForecasts
+    }
+    
+    fileprivate func forNoon() -> Forecast? {
+        let forecast = self
+        guard let tomorrow = Day.tomorrow() else {
+            return nil
+        }
+        guard let date = forecast.date else {
+            return nil
+        }
+        if forecast.hour == "12" && date >= tomorrow {
+            return forecast
+        }
+        return nil
     }
 }
 

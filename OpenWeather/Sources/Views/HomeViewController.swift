@@ -10,21 +10,20 @@ import UIKit
 import RxSwift
 import RxDataSources
 import NSObject_Rx
-import Realm
-import RxRealm
-import RxCocoa
 
-fileprivate let ConditionCellIdentifier = "ConditionCellIdentifier"
-fileprivate let ForecastCellIdentifier = "ForecastCellIdentifier"
 fileprivate let minimumInteritemSpacingForSection: CGFloat = 1.0
 fileprivate let minimumLineSpacingForSection: CGFloat = 1.0
 fileprivate let sizeForItem: CGSize = CGSize(width: 100, height: 100)
 
 open class HomeViewController: UIViewController {
+    // MARK: - Properties
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var iconLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     internal var viewModel: HomeViewModel!
     
@@ -46,13 +45,13 @@ open class HomeViewController: UIViewController {
         return dataSource
     }()
     
+    //MARK: - View lifecycle
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.view.backgroundColor = .clear
-        self.view.backgroundColor = UIColor.appBlue()
         
         collectionView.registerNib(cellClass: ForecastCollectionViewCell.self)
         initLabels()
@@ -76,13 +75,13 @@ open class HomeViewController: UIViewController {
     fileprivate func initLabels() {
         self.temperatureLabel.text = "T°"
         self.iconLabel.text = "W"
-        self.currentDateLabel.text = fullDateFormat.string(from: Date())
+        self.currentDateLabel.text = "\(fullDateFormat.string(from: Date()))"
     }
     
     fileprivate func transition(toDetailViewOf forecast: Forecast) {
         let viewModel = ForecastDetailViewModel(initWith: forecast)
         
-        let navigationController = AppDelegate.sharedDelegate().storyBoard.instantiateViewController(withIdentifier: "Detail") as! UINavigationController
+        let navigationController = AppDelegate.sharedDelegate().storyBoard.instantiateViewController(withIdentifier: detailViewControllerIdentifier) as! UINavigationController
         var forecastDetailViewController = navigationController.viewControllers.first as! ForecastDetailViewController
         forecastDetailViewController.bindViewModel(to: viewModel)
         
@@ -94,14 +93,15 @@ open class HomeViewController: UIViewController {
     fileprivate func configureLabels(with condition: Condition) {
         self.temperatureLabel.text = "\(Int(condition.temperature))°"
         self.iconLabel.text = "\(condition.iconURL)"
+        self.pressureLabel.text = "\(Int(condition.pressure))"
+        self.descriptionLabel.text = "\(condition.comment)"
+        self.humidityLabel.text = "\(condition.humidity)"
     }
 }
 
 extension HomeViewController: BindableType {
+    //MARK: - BindableType
     func bindViewModel() {
-        viewModel.cityService.update()
-            .subscribe()
-            .addDisposableTo(rx_disposeBag)
         
         viewModel.forecastsForNextFiveDaysSection
             .bind(to: collectionView.rx.items(dataSource: forecastDataSource))

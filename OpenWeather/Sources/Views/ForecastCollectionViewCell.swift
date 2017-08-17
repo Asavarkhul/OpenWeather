@@ -10,11 +10,13 @@ import UIKit
 import RxSwift
 
 public final class ForecastCollectionViewCell: UICollectionViewCell {
+    // MARK: - Properties
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var weatherIconLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     var disposeBag = DisposeBag()
     
+    //MARK: - View lifecycle
     override public func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 10.0
@@ -26,6 +28,14 @@ public final class ForecastCollectionViewCell: UICollectionViewCell {
         didSet {
             self.updateHighlightUI()
         }
+    }
+    
+    override public func prepareForReuse() {
+        dayLabel.text = "Day"
+        weatherIconLabel.text = "W"
+        tempLabel.text = "Temp"
+        disposeBag = DisposeBag()
+        super.prepareForReuse()
     }
     
     fileprivate func updateHighlightUI() {
@@ -67,13 +77,5 @@ public final class ForecastCollectionViewCell: UICollectionViewCell {
                 strongSelf.tempLabel.text = "\(Int(temp).description)°"
             })
             .addDisposableTo(disposeBag)
-    }
-    
-    override public func prepareForReuse() {
-        dayLabel.text = "Day"
-        weatherIconLabel.text = "W"
-        tempLabel.text = "Temp"
-        disposeBag = DisposeBag()
-        super.prepareForReuse()
     }
 }

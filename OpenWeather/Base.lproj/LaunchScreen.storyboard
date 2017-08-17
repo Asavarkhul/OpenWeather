@@ -20,13 +20,39 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="htk-Ju-yNF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-ka-Pnc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bZF-yN-jon">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.28627450980392155" green="0.72549019607843135" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="htk-Ju-yNF" secondAttribute="trailing" id="49F-D7-6se"/>
+                            <constraint firstAttribute="trailing" secondItem="jQu-ka-Pnc" secondAttribute="trailing" id="EhQ-K8-PkE"/>
+                            <constraint firstItem="htk-Ju-yNF" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="OC2-7S-ssY"/>
+                            <constraint firstItem="jQu-ka-Pnc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Ukc-LE-koD"/>
+                            <constraint firstItem="htk-Ju-yNF" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="aLE-yH-3s5"/>
+                            <constraint firstItem="jQu-ka-Pnc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="eGn-Jl-c59"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="htk-Ju-yNF" secondAttribute="bottom" id="kxf-ne-fmh"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="jQu-ka-Pnc" secondAttribute="bottom" id="sHR-xb-tMj"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background" width="351" height="607"/>
+    </resources>
 </document>

@@ -10,17 +10,9 @@ import UIKit
 import RxSwift
 import RxDataSources
 import NSObject_Rx
-import Realm
-import RxRealm
-import RxCocoa
 
-fileprivate let ForecastDetailCollectionViewCellIdentifier = "ForecastDetailCollectionViewCell"
-public let iOSDefaultSpicing: CGFloat = 8
-public let forecastViewCellMaxSize: CGSize = CGSize(width: 2048, height: 1536)
-public let forecastViewCellRatio: CGFloat = forecastViewCellMaxSize.width / forecastViewCellMaxSize.height
-public let idealWidthForModal: Int = 280
-
-public final class ForecastDetailViewController: UIViewController, BindableType {
+public final class ForecastDetailViewController: UIViewController {
+    // MARK: - Properties
     @IBOutlet weak var collectionView: UICollectionView!
     
     internal var viewModel: ForecastDetailViewModel!
@@ -45,6 +37,8 @@ public final class ForecastDetailViewController: UIViewController, BindableType 
     }()
     
     fileprivate let collectionViewFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    
+    //MARK: - View lifecycle
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.darkBlue()
@@ -60,7 +54,6 @@ public final class ForecastDetailViewController: UIViewController, BindableType 
                                                                   bottom: iOSDefaultSpicing,
                                                                   right: iOSDefaultSpicing)
         self.collectionView.collectionViewLayout = self.collectionViewFlowLayout
-        
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.alwaysBounceHorizontal = false
     }
@@ -71,24 +64,15 @@ public final class ForecastDetailViewController: UIViewController, BindableType 
     }
     
     //MARK: - Layout
-    
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.collectionViewFlowLayout.itemSize = self.collectionViewFlowLayout.itemSizeThatFits(constrainedToRatio: forecastViewCellRatio,
                                                                                                 andConstrainedToLength: idealWidthForModal..<Int.max)
     }
-    
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition(in: self.view, animation: { _ in
-            self.collectionView.reloadData()
-        }, completion: nil)
-        super.viewWillTransition(to: size, with: coordinator)
-    }
-    
-    public override func updateViewConstraints() {
-        super.updateViewConstraints()
-    }
-    
+}
+
+extension ForecastDetailViewController: BindableType {
+    //MARK: - BindableType
     func bindViewModel() {
         viewModel.forecast.rx.observe(Date.self, "date")
             .subscribe(onNext: {[weak self] date in

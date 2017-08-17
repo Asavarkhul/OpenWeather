@@ -80,7 +80,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.1953125" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="R6f-mu-5YG" firstAttribute="top" secondItem="kqd-LY-aqD" secondAttribute="bottom" constant="6" id="AS4-eX-0nU"/>
                             <constraint firstItem="lvG-X3-7SS" firstAttribute="centerX" secondItem="LdH-4t-Exc" secondAttribute="centerX" id="Apr-cV-A89"/>
@@ -108,7 +108,7 @@
                 <outlet property="cloudinessLabel" destination="R6f-mu-5YG" id="mdh-jP-752"/>
                 <outlet property="hourLabel" destination="kqd-LY-aqD" id="0kn-kX-aMl"/>
                 <outlet property="iconLabel" destination="LdH-4t-Exc" id="ntF-dV-lrB"/>
-                <outlet property="minTemperatureLabell" destination="lvG-X3-7SS" id="Sqh-fU-sjf"/>
+                <outlet property="temperatureLabell" destination="lvG-X3-7SS" id="CaR-IA-EcD"/>
                 <outlet property="windSpeedLabel" destination="ojo-gw-fMg" id="6fo-rt-ZtG"/>
             </connections>
             <point key="canvasLocation" x="650.5" y="402"/>

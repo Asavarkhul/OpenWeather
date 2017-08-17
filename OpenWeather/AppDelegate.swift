@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ObjectMapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,14 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var storyBoard: UIStoryboard = {
         return UIStoryboard(name: "Main", bundle: nil)
     }()
+    
+    lazy var city: City = {
+        return City.getCurrentCity()
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Appearence.customize()
         
-        let currentCity = City.getCurrentCity()
-        let viewModel = HomeViewModel(initWith: currentCity)
-        
-        let navigationController = storyBoard.instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        let viewModel = HomeViewModel(initWith: city)
+        let navigationController = storyBoard.instantiateViewController(withIdentifier: homeViewControllerIdentifier) as! UINavigationController
         var homeViewController = navigationController.viewControllers.first as! HomeViewController
         homeViewController.bindViewModel(to: viewModel)
 
@@ -36,5 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        let service = CityService(for: city)
+        service.update() { _ in}
     }
 }

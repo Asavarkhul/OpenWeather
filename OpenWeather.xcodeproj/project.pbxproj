@@ -13,6 +13,7 @@
 		06223B501F44708F007B15E4 /* ForecastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06223B4F1F44708F007B15E4 /* ForecastDetailViewController.swift */; };
 		06223B531F44937D007B15E4 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06223B521F44937C007B15E4 /* UIViewController+Extensions.swift */; };
 		06223B551F449608007B15E4 /* ForecastDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06223B541F449608007B15E4 /* ForecastDetailViewModel.swift */; };
+		063BC6FE1F462C3D00E13D9B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BC6FD1F462C3D00E13D9B /* UIColor+Extensions.swift */; };
 		068AFF6A1F3DB76500564133 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068AFF691F3DB76500564133 /* HomeViewModel.swift */; };
 		06A387EE1F3CD4CE003C1A82 /* Action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A387E31F3CD4CE003C1A82 /* Action.framework */; };
 		06A387EF1F3CD4CE003C1A82 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A387E41F3CD4CE003C1A82 /* Alamofire.framework */; };
@@ -50,6 +51,7 @@
 		06B305211F4228F100EBA2F6 /* CollectionsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B305201F4228F100EBA2F6 /* CollectionsExtensions.swift */; };
 		06B305221F424BC800EBA2F6 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B305131F4200E600EBA2F6 /* RxDataSources.framework */; };
 		06B305231F424BD900EBA2F6 /* RxDataSources.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06B305131F4200E600EBA2F6 /* RxDataSources.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		06DAB8BB1F45980400F38104 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DAB8BA1F45980400F38104 /* Constant.swift */; };
 		06E618CB1F3C9C4200138525 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E618CA1F3C9C4200138525 /* AppDelegate.swift */; };
 		06E618D21F3C9C4200138525 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06E618D11F3C9C4200138525 /* Assets.xcassets */; };
 		06E618D51F3C9C4200138525 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06E618D31F3C9C4200138525 /* LaunchScreen.storyboard */; };
@@ -103,6 +105,7 @@
 		06223B4F1F44708F007B15E4 /* ForecastDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewController.swift; sourceTree = "<group>"; };
 		06223B521F44937C007B15E4 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		06223B541F449608007B15E4 /* ForecastDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewModel.swift; sourceTree = "<group>"; };
+		063BC6FD1F462C3D00E13D9B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		068AFF691F3DB76500564133 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		06A387E31F3CD4CE003C1A82 /* Action.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Action.framework; path = Carthage/Build/iOS/Action.framework; sourceTree = "<group>"; };
 		06A387E41F3CD4CE003C1A82 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		06B3051A1F42067000EBA2F6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		06B3051C1F4226D700EBA2F6 /* CityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityService.swift; sourceTree = "<group>"; };
 		06B305201F4228F100EBA2F6 /* CollectionsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsExtensions.swift; sourceTree = "<group>"; };
+		06DAB8BA1F45980400F38104 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		06E618C71F3C9C4200138525 /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06E618CA1F3C9C4200138525 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06E618D11F3C9C4200138525 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				06B305201F4228F100EBA2F6 /* CollectionsExtensions.swift */,
 				06223B521F44937C007B15E4 /* UIViewController+Extensions.swift */,
 				06F718431F44C432000DF2EF /* CGRect+Operators.swift */,
+				063BC6FD1F462C3D00E13D9B /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 		06E618EB1F3C9FE200138525 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				06DAB8BA1F45980400F38104 /* Constant.swift */,
 				06B305031F41DC5D00EBA2F6 /* Views */,
 				068AFF681F3DB74A00564133 /* ViewModels */,
 				06B3050E1F41EAF300EBA2F6 /* Services */,
@@ -495,7 +501,9 @@
 				06B305211F4228F100EBA2F6 /* CollectionsExtensions.swift in Sources */,
 				06F7183C1F44AA0E000DF2EF /* ForecastDetailCollectionViewCell.swift in Sources */,
 				06A3880B1F3CF17E003C1A82 /* Condition.swift in Sources */,
+				06DAB8BB1F45980400F38104 /* Constant.swift in Sources */,
 				06B305101F41EB0800EBA2F6 /* ConditionService.swift in Sources */,
+				063BC6FE1F462C3D00E13D9B /* UIColor+Extensions.swift in Sources */,
 				06F718441F44C432000DF2EF /* CGRect+Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

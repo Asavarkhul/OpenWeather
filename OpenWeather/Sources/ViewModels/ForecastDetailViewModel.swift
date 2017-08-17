@@ -10,10 +10,9 @@ import Foundation
 import RxSwift
 import RxDataSources
 import Action
-import RealmSwift
-import RxRealm
 
 public struct ForecastDetailViewModel {
+    // MARK: - Properties
     internal let forecast: Forecast!
     fileprivate var conditionService = ConditionService()
     fileprivate var forecastService = ForecastService()
@@ -27,12 +26,8 @@ public struct ForecastDetailViewModel {
     func forecasts(for day: String) -> Observable<[ForecastsSection]>{
         return self.forecastService.forecasts()
             .map { results in
-                var forecasts: [Forecast] = []
-                let forecastsFromResult = results.toArray()
-                forecastsFromResult.forEach { (forecast) -> () in
-                    if forecast.day == day {
-                        forecasts.append(forecast)
-                    }
+                guard let forecasts = Forecast.filter(results.toArray(), for: day) else {
+                    return []
                 }
                 return [
                     ForecastsSection(model: "", items: forecasts)

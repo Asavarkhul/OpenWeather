@@ -43,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34L-5A-R6m">
-                        <rect key="frame" x="34.5" y="72" width="31" height="16.5"/>
+                        <rect key="frame" x="33.5" y="72" width="31" height="16.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16.5" id="jBT-2d-mGJ"/>
                         </constraints>
@@ -53,7 +53,7 @@
                     </label>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.078178879310000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20218893924150685" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="34L-5A-R6m" firstAttribute="centerX" secondItem="Ncc-u5-BN9" secondAttribute="centerX" id="3UE-Lb-Cwk"/>
                 <constraint firstAttribute="trailing" secondItem="MH3-o2-c2s" secondAttribute="trailing" constant="8" id="5wA-V9-uro"/>

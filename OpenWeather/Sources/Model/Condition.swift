@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import Unbox
 import Alamofire
 import ObjectMapper
 import RxDataSources
@@ -21,8 +20,6 @@ class Condition: Object, Mappable {
     dynamic var comment: String = ""
     dynamic var iconURL: String = ""
     dynamic var temperature: Double = 0.0
-    dynamic var minTemperature: Double = 0.0
-    dynamic var maxTemperature: Double = 0.0
     dynamic var windSpeed: Double = 0.0
     dynamic var windName: String = ""
     dynamic var precipitation: Double = 0.0
@@ -46,8 +43,6 @@ class Condition: Object, Mappable {
         iconURL <- (map["weather.0.icon"], IconURLTransformer())
         
         temperature <- map["main.temp"]
-        minTemperature <- map["main.temp_min"]
-        maxTemperature <- map["main.temp_max"]
         
         windSpeed <- map["wind.speed.value"]
         windName <- map["wind.speed.name"]

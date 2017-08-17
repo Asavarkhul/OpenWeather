@@ -11,15 +11,11 @@ import RealmSwift
 import Alamofire
 
 class City: Object {
+    // MARK: - Properties
     dynamic var identifier:Int = 0
     dynamic var name = ""
     dynamic var currentCondition: Condition?
     let forecasts = List<Forecast>()
-    
-    enum Status {
-        case unavailable
-        case exist(City)
-    }
 }
 
 //MARK: - Static
