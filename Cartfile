@@ -1,9 +1,9 @@
 github "Alamofire/Alamofire"
-github "SwiftyJSON/SwiftyJSON"
-github "johnsundell/unbox"
-github "realm/realm-cocoa"
+github "RxSwiftCommunity/RxAlamofire" "master"
 github "ReactiveX/RxSwift"
-github "RxSwiftCommunity/RxRealmDataSources"
+github "RxSwiftCommunity/RxRealm"
+github "RxSwiftCommunity/RxDataSources" ~> 1.0
+github "realm/realm-cocoa"
 github "RxSwiftCommunity/Action"
 github "RxSwiftCommunity/NSObject-Rx"
-github "RxSwiftCommunity/RxRealm"
+github "Hearst-DD/ObjectMapper" ~> 2.2

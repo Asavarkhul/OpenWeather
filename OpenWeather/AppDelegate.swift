@@ -10,20 +10,37 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
+    
+    class func sharedDelegate() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    lazy var storyBoard: UIStoryboard = {
+        return UIStoryboard(name: "Main", bundle: nil)
+    }()
+    
+    lazy var city: City = {
+        return City.getCurrentCity()
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Appearence.customize()
         
-        let viewController = UIViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let viewModel = HomeViewModel(initWith: city)
+        let navigationController = storyBoard.instantiateViewController(withIdentifier: homeViewControllerIdentifier) as! UINavigationController
+        var homeViewController = navigationController.viewControllers.first as! HomeViewController
+        homeViewController.bindViewModel(to: viewModel)
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        let service = CityService(for: city)
+        service.update() { _ in}
+    }
 }
-
