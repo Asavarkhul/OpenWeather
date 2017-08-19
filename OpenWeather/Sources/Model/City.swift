@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import Alamofire
 
 class City: Object {
     // MARK: - Properties
@@ -20,7 +19,7 @@ class City: Object {
 
 //MARK: - Static
 extension City {
-    static func getCurrentCity() -> City {
+    static func getCurrentCityIfExistsOrCreatesOne() -> City {
         do {
             let realm = try Realm()
             if let currentCity = realm.objects(City.self).first {

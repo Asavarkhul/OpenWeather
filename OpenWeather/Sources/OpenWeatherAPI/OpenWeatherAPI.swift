@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 import Alamofire
 
-fileprivate let okRequestStatusCode: Int = 200
-fileprivate let multipleChoicesStatusCode: Int = 300
-fileprivate let badRequestStatusCode: Int = 400
-fileprivate let unauthorizedStatusCode: Int = 401
-fileprivate let internalServerErrorStatusCode: Int = 500
-fileprivate let serverErrorStatusCode: Int = 600
+public let okRequestStatusCode: Int = 200
+public let multipleChoicesStatusCode: Int = 300
+public let badRequestStatusCode: Int = 400
+public let unauthorizedStatusCode: Int = 401
+public let internalServerErrorStatusCode: Int = 500
+public let serverErrorStatusCode: Int = 600
 
 // MARK: - Units
 public enum Units: String {
@@ -60,6 +60,7 @@ extension OpenWeatherRouter: URLRequestConvertible {
     
     // MARK: URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
+        
         let url = try OpenWeatherRouter.baseURLString.asURL()
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
@@ -67,5 +68,13 @@ extension OpenWeatherRouter: URLRequestConvertible {
         urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         
         return urlRequest
+    }
+}
+
+extension OpenWeatherRouter {
+    enum ApiError: Error {
+        case cityNotFound
+        case serverFailure
+        case invalidKey
     }
 }

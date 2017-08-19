@@ -12,6 +12,10 @@ import ObjectMapper
 import RxDataSources
 import Alamofire
 
+fileprivate let twelvePM = "12"
+fileprivate let nineAM = "9"
+fileprivate let sixAM = "6"
+
 class Forecast: Object, Mappable {
     // MARK: - Properties
     dynamic var comment: String = ""
@@ -64,42 +68,29 @@ extension Forecast {
         var localForecasts: [Forecast] = []
         forecasts.forEach { forecast -> Void in
             if !localForecasts.contains(where: { $0.day == forecast.day }) {
-                guard let noonForecast = forecast.forNoon() else {
+                guard let mostExplicitForecast = forecast.mostExplicit() else {
                     return
                 }
-                localForecasts.append(noonForecast)
+                localForecasts.append(mostExplicitForecast)
             }
         }
         return localForecasts
     }
     
-    fileprivate func forNoon() -> Forecast? {
+    fileprivate func mostExplicit() -> Forecast? {
         let forecast = self
-        guard let tomorrow = Day.tomorrow() else {
+        guard let tomorrow = Day.tomorrow(), let date = forecast.date else {
             return nil
         }
-        guard let date = forecast.date else {
-            return nil
-        }
-        if forecast.hour == "12" && date >= tomorrow {
-            return forecast
+        if date >= tomorrow {
+            if forecast.hour == twelvePM {
+                return forecast
+            } else if forecast.hour == nineAM {
+                return forecast
+            } else if forecast.hour == sixAM {
+                return forecast
+            }
         }
         return nil
-    }
-}
-
-extension Forecast {
-    static func loadForecast(for city: City, completion: @escaping (_ forecasts: [Forecast]) -> Void) {
-        Alamofire.request(OpenWeatherRouter.forecast(cityId: city.identifier, units: .Metric))
-            .responseJSON() { response in
-                guard let jsonResponse = response.result.value as? [String: Any], let list = jsonResponse["list"] else {
-                    return
-                }
-                guard let jsonArray = list as? [[String : Any]] else {
-                    return
-                }
-                let forecasts = Mapper<Forecast>().mapArray(JSONArray: jsonArray)
-                completion(forecasts)
-        }
     }
 }

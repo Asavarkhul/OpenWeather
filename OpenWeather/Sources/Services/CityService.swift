@@ -13,36 +13,29 @@ import RxSwift
 struct CityService {
     // MARK: - Properties
     fileprivate let city: City!
+    fileprivate let conditionService: ConditionService!
+    fileprivate let forecastService: ForecastService!
     
     init(for city: City) {
         self.city = city
-    }
-    
-    fileprivate func withRealm<T>(_ operation: String, action: (Realm) throws -> T) -> T? {
-        do {
-            let realm = try Realm()
-            return try action(realm)
-        } catch let err {
-            print("Failed \(operation) realm with error: \(err)")
-            return nil
-        }
+        self.conditionService = ConditionService()
+        self.forecastService = ForecastService()
     }
     
     //MARK: Update
-    func update(_ completion:@escaping (_ error:NSError?) -> ()){
+    func update(_ completion:@escaping (_ error: Error?) -> ()){
         self.updateCurrentCondition { (error) in
             guard error == nil else {
                 completion(error)
                 return
             }
-            
             self.updateForecast(completion)
         }
     }
     
     //MARK: Current condition
-    func updateCurrentCondition(_ completion:@escaping (_ error: NSError?) -> Void){
-        Condition.loadCurrentCondition(for: self.city) { condition in
+    func updateCurrentCondition(_ completion:@escaping (_ error: Error?) -> Void){
+        conditionService.loadCurrentCondition(for: self.city, success: { condition in
             do {
                 let realm = try Realm()
                 try realm.write {
@@ -51,14 +44,16 @@ struct CityService {
                     completion(nil)
                 }
             } catch {
-                completion(NSError())
+                completion(RealmError.unableToSave)
             }
+        }) { error in
+            completion(error)
         }
     }
     
     //MARK: Forecast
-    func updateForecast(_ completion:@escaping (_ error: NSError?) -> Void){
-        Forecast.loadForecast(for: self.city) { forecasts in
+    func updateForecast(_ completion:@escaping (_ error: Error?) -> Void){
+        forecastService.loadForecast(for: self.city, success: { forecasts in
             do {
                 let realm = try Realm()
                 try realm.write {
@@ -75,8 +70,16 @@ struct CityService {
                     completion(nil)
                 }
             } catch {
-                completion(NSError())
+                completion(RealmError.unableToSave)
             }
+        }) { error in
+            completion(error)
         }
+    }
+}
+
+extension CityService {
+    enum RealmError: Error {
+        case unableToSave
     }
 }

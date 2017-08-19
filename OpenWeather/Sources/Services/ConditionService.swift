@@ -10,26 +10,43 @@ import Foundation
 import RealmSwift
 import RxSwift
 import RxRealm
+import Alamofire
+import ObjectMapper
 
 struct ConditionService {
     init() {}
     
-    fileprivate func withRealm<T>(_ operation: String, action: (Realm) throws -> T) -> T? {
-        do {
-            let realm = try Realm()
-            return try action(realm)
-        } catch let err {
-            print("Failed \(operation) realm with error: \(err)")
-            return nil
-        }
-    }
-    
     @discardableResult
     func conditions() -> Observable<Results<Condition>> {
-        let result = withRealm("Getting conditions") { realm -> Observable<Results<Condition>> in
+        let result = Launcher.withRealm("Getting conditions") { realm -> Observable<Results<Condition>> in
             let conditions = realm.objects(Condition.self)
             return Observable.collection(from: conditions)
         }
         return result ?? .empty()
+    }
+    
+    func loadCurrentCondition(for city: City,
+                                     success:@escaping (_ condition: Condition) -> Void,
+                                     failure: @escaping (_ error: Error) -> Void) {
+        Alamofire.request(OpenWeatherRouter.current(cityId: city.identifier, units: .Metric))
+            .responseJSON() { dataResponse in
+                guard let httpURLResponse = dataResponse.response else {
+                    failure(OpenWeatherRouter.ApiError.serverFailure)
+                    return
+                }
+                if okRequestStatusCode ..< multipleChoicesStatusCode ~= httpURLResponse.statusCode {
+                    guard let jsonResponse = dataResponse.result.value, let condition = Mapper<Condition>().map(JSON: jsonResponse as! [String : Any]) else {
+                        failure(OpenWeatherRouter.ApiError.cityNotFound)
+                        return
+                    }
+                    success(condition)
+                } else if httpURLResponse.statusCode == unauthorizedStatusCode {
+                    failure(OpenWeatherRouter.ApiError.invalidKey)
+                } else if badRequestStatusCode ..< internalServerErrorStatusCode ~= httpURLResponse.statusCode {
+                    failure(OpenWeatherRouter.ApiError.cityNotFound)
+                } else {
+                    failure(OpenWeatherRouter.ApiError.serverFailure)
+                }
+        }
     }
 }

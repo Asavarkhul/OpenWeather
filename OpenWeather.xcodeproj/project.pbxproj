@@ -14,6 +14,10 @@
 		06223B531F44937D007B15E4 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06223B521F44937C007B15E4 /* UIViewController+Extensions.swift */; };
 		06223B551F449608007B15E4 /* ForecastDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06223B541F449608007B15E4 /* ForecastDetailViewModel.swift */; };
 		063BC6FE1F462C3D00E13D9B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BC6FD1F462C3D00E13D9B /* UIColor+Extensions.swift */; };
+		066215241F46D09800A0C4F6 /* TestRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066215231F46D09800A0C4F6 /* TestRealm.swift */; };
+		0669C1E71F489C110053BD3E /* Launcher+RealmLaunchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0669C1E61F489C110053BD3E /* Launcher+RealmLaunchable.swift */; };
+		0669C1EA1F48A33E0053BD3E /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0669C1E81F48A33E0053BD3E /* ErrorView.swift */; };
+		0669C1EB1F48A33E0053BD3E /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0669C1E91F48A33E0053BD3E /* ErrorView.xib */; };
 		068AFF6A1F3DB76500564133 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068AFF691F3DB76500564133 /* HomeViewModel.swift */; };
 		06A387EE1F3CD4CE003C1A82 /* Action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A387E31F3CD4CE003C1A82 /* Action.framework */; };
 		06A387EF1F3CD4CE003C1A82 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A387E41F3CD4CE003C1A82 /* Alamofire.framework */; };
@@ -106,6 +110,10 @@
 		06223B521F44937C007B15E4 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		06223B541F449608007B15E4 /* ForecastDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewModel.swift; sourceTree = "<group>"; };
 		063BC6FD1F462C3D00E13D9B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		066215231F46D09800A0C4F6 /* TestRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRealm.swift; sourceTree = "<group>"; };
+		0669C1E61F489C110053BD3E /* Launcher+RealmLaunchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Launcher+RealmLaunchable.swift"; sourceTree = "<group>"; };
+		0669C1E81F48A33E0053BD3E /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = ErrorView/ErrorView.swift; sourceTree = "<group>"; };
+		0669C1E91F48A33E0053BD3E /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ErrorView.xib; path = ErrorView/ErrorView.xib; sourceTree = "<group>"; };
 		068AFF691F3DB76500564133 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		06A387E31F3CD4CE003C1A82 /* Action.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Action.framework; path = Carthage/Build/iOS/Action.framework; sourceTree = "<group>"; };
 		06A387E41F3CD4CE003C1A82 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -199,6 +207,23 @@
 			name = "ForecastDetail cells";
 			sourceTree = "<group>";
 		};
+		066215221F46D04600A0C4F6 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				066215231F46D09800A0C4F6 /* TestRealm.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		0669C1EC1F48A34D0053BD3E /* Error View */ = {
+			isa = PBXGroup;
+			children = (
+				0669C1E81F48A33E0053BD3E /* ErrorView.swift */,
+				0669C1E91F48A33E0053BD3E /* ErrorView.xib */,
+			);
+			name = "Error View";
+			sourceTree = "<group>";
+		};
 		068AFF681F3DB74A00564133 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +286,7 @@
 				06223B4F1F44708F007B15E4 /* ForecastDetailViewController.swift */,
 				06F718451F44D2A2000DF2EF /* Home cells */,
 				06223B511F448F6B007B15E4 /* ForecastDetail cells */,
+				0669C1EC1F48A34D0053BD3E /* Error View */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,6 +299,7 @@
 				06223B521F44937C007B15E4 /* UIViewController+Extensions.swift */,
 				06F718431F44C432000DF2EF /* CGRect+Operators.swift */,
 				063BC6FD1F462C3D00E13D9B /* UIColor+Extensions.swift */,
+				0669C1E61F489C110053BD3E /* Launcher+RealmLaunchable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -331,6 +358,7 @@
 		06E618DE1F3C9C4200138525 /* OpenWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				066215221F46D04600A0C4F6 /* Mock */,
 				06E618DF1F3C9C4200138525 /* OpenWeatherTests.swift */,
 				06E618E11F3C9C4200138525 /* Info.plist */,
 			);
@@ -461,6 +489,7 @@
 				06223B3F1F43923E007B15E4 /* LICENSE in Resources */,
 				06B3051B1F42067000EBA2F6 /* Main.storyboard in Resources */,
 				06E618D51F3C9C4200138525 /* LaunchScreen.storyboard in Resources */,
+				0669C1EB1F48A33E0053BD3E /* ErrorView.xib in Resources */,
 				06F7183D1F44AA0E000DF2EF /* ForecastDetailCollectionViewCell.xib in Resources */,
 				06F718491F44E2E2000DF2EF /* ForecastCollectionViewCell.xib in Resources */,
 				06223B401F43923E007B15E4 /* weather.ttf in Resources */,
@@ -482,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0669C1EA1F48A33E0053BD3E /* ErrorView.swift in Sources */,
 				06A388061F3CEF24003C1A82 /* Forecast.swift in Sources */,
 				06E618CB1F3C9C4200138525 /* AppDelegate.swift in Sources */,
 				06B305191F4205CB00EBA2F6 /* IconURLTransformer.swift in Sources */,
@@ -496,6 +526,7 @@
 				06E618ED1F3CA02400138525 /* Appearence.swift in Sources */,
 				06B3050D1F41E6D500EBA2F6 /* UIViewController+BindableType.swift in Sources */,
 				06B305051F41DD0500EBA2F6 /* HomeViewController.swift in Sources */,
+				0669C1E71F489C110053BD3E /* Launcher+RealmLaunchable.swift in Sources */,
 				06A388091F3CF0D3003C1A82 /* OpenWeatherAPI.swift in Sources */,
 				06B305121F41EB1700EBA2F6 /* ForecastService.swift in Sources */,
 				06B305211F4228F100EBA2F6 /* CollectionsExtensions.swift in Sources */,
@@ -513,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06E618E01F3C9C4200138525 /* OpenWeatherTests.swift in Sources */,
+				066215241F46D09800A0C4F6 /* TestRealm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
