@@ -23,7 +23,7 @@ class TestData {
         return Mapper<Condition>().map(JSON: JSONParser.readJSONFile(forName: "Condition"))
     }
     
-    static var forecasts: [Forecast]? {
+    static var forecastObjects: [Forecast]? {
         var jsonResponse: [String: Any]?
         jsonResponse = JSONParser.readJSONFile(forName: "Forecast")
         guard
@@ -36,8 +36,6 @@ class TestData {
     }
     
     static var forecast: Forecast? {
-        return forecasts?.first
+        return forecastObjects?.first
     }
-    
-    
 }

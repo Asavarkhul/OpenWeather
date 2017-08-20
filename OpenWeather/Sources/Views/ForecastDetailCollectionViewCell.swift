@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 
+fileprivate let layerCornerRadius: CGFloat = 3.0
+
 public final class ForecastDetailCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     @IBOutlet weak var iconLabel: UILabel!
@@ -21,7 +23,7 @@ public final class ForecastDetailCollectionViewCell: UICollectionViewCell {
     //MARK: - View lifecycle
     override public func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 3.0
+        self.layer.cornerRadius = layerCornerRadius
         self.layer.masksToBounds = true
         self.configureLabel()
     }

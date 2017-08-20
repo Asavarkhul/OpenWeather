@@ -79,7 +79,7 @@ extension Forecast {
     
     fileprivate func mostExplicit() -> Forecast? {
         let forecast = self
-        guard let tomorrow = Day.tomorrow(), let date = forecast.date else {
+        guard let tomorrow = Day.tomorrowMinusCurrentHour(), let date = forecast.date else {
             return nil
         }
         if date >= tomorrow {

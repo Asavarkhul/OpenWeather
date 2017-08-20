@@ -98,7 +98,7 @@ open class HomeViewController: UIViewController {
         self.iconLabel.text = "\(condition.iconURL)"
         self.pressureLabel.text = "\(Int(condition.pressure))"
         self.descriptionLabel.text = "\(condition.comment)"
-        self.humidityLabel.text = "\(condition.humidity)"
+        self.humidityLabel.text = "\(Int(condition.humidity))"
     }
 }
 

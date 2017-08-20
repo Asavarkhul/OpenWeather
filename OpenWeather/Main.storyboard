@@ -142,9 +142,9 @@
                                                     <rect key="frame" x="53" y="230" width="269" height="127"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYm-B8-T8O">
-                                                            <rect key="frame" x="8" y="8" width="121" height="111"/>
+                                                            <rect key="frame" x="21" y="8" width="121" height="111"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRESSURE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLL-ZS-4xD">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRESSURE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLL-ZS-4xD">
                                                                     <rect key="frame" x="8" y="8" width="105" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="k2k-B7-9La"/>
@@ -240,7 +240,7 @@
                                                         <constraint firstAttribute="width" constant="269" id="eH0-mK-Vwb"/>
                                                         <constraint firstItem="A8L-LB-N21" firstAttribute="top" secondItem="fnl-KM-UO2" secondAttribute="top" constant="8" id="jnF-zI-DrO"/>
                                                         <constraint firstAttribute="height" constant="127" id="xw5-bW-5wq"/>
-                                                        <constraint firstItem="PYm-B8-T8O" firstAttribute="leading" secondItem="fnl-KM-UO2" secondAttribute="leading" constant="8" id="yvC-dh-wLr"/>
+                                                        <constraint firstItem="PYm-B8-T8O" firstAttribute="leading" secondItem="fnl-KM-UO2" secondAttribute="leading" constant="21" id="yvC-dh-wLr"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

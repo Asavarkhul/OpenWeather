@@ -12,8 +12,11 @@ import RxCocoa
 import ObjectMapper
 import RealmSwift
 import RxRealm
+import RxDataSources
 
 @testable import OpenWeather
+
+fileprivate let fiveNextForcast = 5
 
 class HomeViewModelTests: XCTestCase {
     fileprivate func createViewModel() -> HomeViewModel {
@@ -26,7 +29,7 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.city)
     }
     
-    func test_whenInitialized_bindsData() {
+    func test_whenInitialized_ForecastsCorrectlyBinded() {
         let asyncExpect = expectation(description: "fullfill test")
         Realm.useCleanMemoryRealmByDefault(identifier: #function)
         
@@ -37,19 +40,51 @@ class HomeViewModelTests: XCTestCase {
         
         let viewModel = createViewModel()
         try! realm.write {
-            realm.add(condition)
+            realm.add(condition, update: true)
             viewModel.city.currentCondition = condition
         }
         
-        _ = viewModel.conditions.asObservable()
-            .subscribe(onNext: { _ in
+        var conditionEmitted = [[Condition]]()
+        _ = viewModel.conditions
+            .subscribe(onNext: { value in
+                conditionEmitted.append(value)
                 asyncExpect.fulfill()
             })
         
         waitForExpectations(timeout: 1.0, handler: { error in
             XCTAssertNil(error, "error: \(error!.localizedDescription)")
+            XCTAssertTrue(conditionEmitted.count == 1)
             XCTAssertNotNil(viewModel.city.currentCondition, "Condition is nil")
             XCTAssertEqual(viewModel.city.currentCondition, condition)
+        })
+    }
+    
+    func test_whenInitialized_ConditionsCorrectlyBinded() {
+        let asyncExpect = expectation(description: "fullfill test")
+        
+        let realm = try! Realm()
+        guard let forecasts = TestData.forecastObjects else {
+            return
+        }
+        
+        let viewModel = createViewModel()
+        try! realm.write {
+            realm.add(forecasts, update: true)
+        }
+        
+        var forecastSectionEmitted = [[ForecastsSection]]()
+        _ = viewModel.forecastsForNextFiveDaysSection
+            .subscribe(onNext: { value in
+                forecastSectionEmitted.append(value)
+                asyncExpect.fulfill()
+            })
+        
+        let forecastSection = forecastSectionEmitted.first?.first
+        let forecastItems = forecastSection?.items
+        
+        waitForExpectations(timeout: 1.0, handler: { error in
+            XCTAssertNil(error, "error: \(error!.localizedDescription)")
+            XCTAssertTrue(forecastItems?.count == fiveNextForcast)
         })
     }
 }

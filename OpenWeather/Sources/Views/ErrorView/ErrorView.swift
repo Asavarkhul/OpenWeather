@@ -8,6 +8,15 @@
 
 import UIKit
 
+fileprivate let errorViewShadowOpacity: Float = 1
+fileprivate let errorViewWidthOffset: Int = 0
+fileprivate let errorViewHeightOffset: Int = 3
+fileprivate let twelve: CGFloat = 12
+fileprivate let twentyFour: CGFloat = 24
+fileprivate let errorViewAnimationDuration: Double = 0.33
+fileprivate let nullAlpha: CGFloat = 0.0
+fileprivate let defaultAlpha: CGFloat = 1.0
+
 class ErrorView: UIView {
     @IBOutlet weak var errorMessageMabel: UILabel!
     @IBOutlet weak var dismissButton: UIButton!
@@ -35,19 +44,19 @@ class ErrorView: UIView {
             
             sharedViewInstance.layer.masksToBounds = false
             sharedViewInstance.layer.shadowColor = UIColor.darkGray.cgColor
-            sharedViewInstance.layer.shadowOpacity = 1
-            sharedViewInstance.layer.shadowOffset = CGSize(width: 0, height: 3)
+            sharedViewInstance.layer.shadowOpacity = errorViewShadowOpacity
+            sharedViewInstance.layer.shadowOffset = CGSize(width: errorViewWidthOffset, height: errorViewHeightOffset)
         }
         
         sharedViewInstance.errorMessageMabel.text = message
         
         if sharedViewInstance?.superview == nil {
-            let y = displayedViewController.view.frame.height - sharedViewInstance.frame.size.height - 12
-            sharedViewInstance.frame = CGRect(x: 12,
+            let y = displayedViewController.view.frame.height - sharedViewInstance.frame.size.height - twelve
+            sharedViewInstance.frame = CGRect(x: twelve,
                                               y: y,
-                                              width: displayedViewController.view.frame.size.width - 24,
+                                              width: displayedViewController.view.frame.size.width - twentyFour,
                                               height: sharedViewInstance.frame.size.height)
-            sharedViewInstance.alpha = 0.0
+            sharedViewInstance.alpha = nullAlpha
             
             displayedViewController.view.addSubview(sharedViewInstance)
             sharedViewInstance.fadeIn()
@@ -56,15 +65,15 @@ class ErrorView: UIView {
     
     //MARK: - Animations
     fileprivate func fadeIn() {
-        UIView.animate(withDuration: 0.33) { _ in
-            self.alpha = 1.0
+        UIView.animate(withDuration: errorViewAnimationDuration) { _ in
+            self.alpha = defaultAlpha
         }
     }
     
     @objc
     fileprivate func fadeOut() {
-        UIView.animate(withDuration: 0.33, animations: {
-            self.alpha = 0.0
+        UIView.animate(withDuration: errorViewAnimationDuration, animations: {
+            self.alpha = nullAlpha
         }, completion: { _ in
             self.removeFromSuperview()
         })

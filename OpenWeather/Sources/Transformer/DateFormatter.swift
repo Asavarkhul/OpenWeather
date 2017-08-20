@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Day {
-    public static func tomorrow() -> Date? {
+    public static func tomorrowMinusCurrentHour() -> Date? {
         let today = Date()
         let currentHour = Int(hourFormat.string(from: today))
         let tomorrowAtSameHour = Calendar.current.date(byAdding: .day, value: 1, to: today)

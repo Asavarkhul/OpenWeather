@@ -221,8 +221,8 @@
 		066215221F46D04600A0C4F6 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				066215231F46D09800A0C4F6 /* TestRealm.swift */,
 				0625826F1F498C680047479F /* TestData.swift */,
+				066215231F46D09800A0C4F6 /* TestRealm.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
