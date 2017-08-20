@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     lazy var city: City = {
-        return City.getCurrentCity()
+        return City.getCurrentCityIfExistsOrCreatesOne()
     }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -40,7 +40,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        let service = CityService(for: city)
-        service.update() { _ in}
+        let cityService = CityService(for: city)
+        cityService.update() { error in
+            guard let viewController = self.window?.rootViewController else {
+                return
+            }
+            if let error = error as? OpenWeatherRouter.ApiError {
+                switch error {
+                case .cityNotFound:
+                    ErrorView.display(in: viewController, withMessage: "Bad city name")
+                case .invalidKey:
+                    ErrorView.display(in: viewController, withMessage: "Invalid Api Key")
+                case .serverFailure:
+                    ErrorView.display(in: viewController, withMessage: "Server error")
+                }
+            } else if let _ = error as? CityService.RealmError {
+                ErrorView.display(in: viewController, withMessage: "Database failed in savin data")
+            }
+        }
     }
 }

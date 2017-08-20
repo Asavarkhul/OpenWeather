@@ -30,4 +30,8 @@ The guide style is here to help us have consistency across the code and devs.
 Because the end goal is to respect guidelines, it makes sense to use a well known and good writen exising style guide. 
 My reference is the [Ray Wenderlich iOS Swift Style Guide](https://github.com/raywenderlich/swift-style-guide).
 
+### Tests
+
+Just run `cmd + U` and see green everywhere !
+
 

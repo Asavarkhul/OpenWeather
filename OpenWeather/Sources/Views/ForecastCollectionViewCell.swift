@@ -9,6 +9,10 @@
 import UIKit
 import RxSwift
 
+fileprivate let layerCornerRadius: CGFloat = 10.0
+fileprivate let plainBorderWidth: CGFloat = 2.0
+fileprivate let nullBorderWidth: CGFloat = 0.0
+
 public final class ForecastCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     @IBOutlet weak var dayLabel: UILabel!
@@ -19,7 +23,7 @@ public final class ForecastCollectionViewCell: UICollectionViewCell {
     //MARK: - View lifecycle
     override public func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 10.0
+        self.layer.cornerRadius = layerCornerRadius
         self.layer.masksToBounds = true
         self.updateHighlightUI()
     }
@@ -41,7 +45,7 @@ public final class ForecastCollectionViewCell: UICollectionViewCell {
     fileprivate func updateHighlightUI() {
         let borderColor = self.isSelected ? UIColor.white.cgColor : UIColor.clear.cgColor
         self.layer.borderColor = borderColor
-        self.layer.borderWidth = self.isSelected ? 2.0 : 0.0
+        self.layer.borderWidth = self.isSelected ? plainBorderWidth : nullBorderWidth
     }
     
     func configure(with forecast: Forecast) {

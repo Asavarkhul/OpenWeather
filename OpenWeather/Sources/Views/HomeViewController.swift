@@ -76,6 +76,9 @@ open class HomeViewController: UIViewController {
         self.temperatureLabel.text = "T°"
         self.iconLabel.text = "W"
         self.currentDateLabel.text = "\(fullDateFormat.string(from: Date()))"
+        self.pressureLabel.text = "_"
+        self.descriptionLabel.text = ""
+        self.humidityLabel.text = "_"
     }
     
     fileprivate func transition(toDetailViewOf forecast: Forecast) {
@@ -95,7 +98,7 @@ open class HomeViewController: UIViewController {
         self.iconLabel.text = "\(condition.iconURL)"
         self.pressureLabel.text = "\(Int(condition.pressure))"
         self.descriptionLabel.text = "\(condition.comment)"
-        self.humidityLabel.text = "\(condition.humidity)"
+        self.humidityLabel.text = "\(Int(condition.humidity))"
     }
 }
 
