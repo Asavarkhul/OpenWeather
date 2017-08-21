@@ -79,37 +79,37 @@ extension Forecast {
         }
         
         let sortedDays = days.sorted()
-        let duplicates = Array(Set(sortedDays.filter({ (i: Int) in sortedDays.filter({ $0 == i }).count > 1})))
+        let duplicatesDays = Array(Set(sortedDays.filter({ (i: Int) in sortedDays.filter({ $0 == i }).count > 1})))
         
-        var tempForecasts = [Forecast]()
-        duplicates.forEach { day in
+        var correspondingsDaysForecastFromDuplicates = [Forecast]()
+        duplicatesDays.forEach { day in
             forecasts.forEach { forecast in
                 if forecast.day == day.description {
-                    tempForecasts.append(forecast)
+                    correspondingsDaysForecastFromDuplicates.append(forecast)
                 }
             }
         }
         
-        var maxForecastHour = [Forecast]()
-        duplicates.forEach { day in
-            var tempForecastss = [Forecast]()
-            tempForecasts.forEach { forecast in
+        var mostExplicitForecasts = [Forecast]()
+        duplicatesDays.forEach { day in
+            var correspondingDaysForecasts = [Forecast]()
+            correspondingsDaysForecastFromDuplicates.forEach { forecast in
                 if forecast.day == day.description {
-                    tempForecastss.append(forecast)
+                    correspondingDaysForecasts.append(forecast)
                 }
             }
             
-            let tempForecastsSorted = tempForecastss.sorted(by: { $0.day < $1.day })
+            let sortedForecasts = correspondingDaysForecasts.sorted(by: { $0.day < $1.day })
 
             var forecastsInRange = [Forecast]()
-            tempForecastsSorted.forEach { forecast in
+            sortedForecasts.forEach { forecast in
                 guard let hour = Int(forecast.hour) else { return }
                 if 0...12 ~= hour {
                     forecastsInRange.append(forecast)
                 }
             }
             
-            guard let max = forecastsInRange.max(by: { forecastOne, forecastTwo -> Bool in
+            guard let maxForecastInRange = forecastsInRange.max(by: { forecastOne, forecastTwo -> Bool in
                 guard let dateOne = forecastOne.date else { return false }
                 guard let dateTwo = forecastTwo.date else { return false }
                 return dateOne < dateTwo
@@ -117,8 +117,8 @@ extension Forecast {
                 return
             }
             
-            maxForecastHour.append(max)
+            mostExplicitForecasts.append(maxForecastInRange)
         }
-        return maxForecastHour
+        return mostExplicitForecasts
     }
 }
