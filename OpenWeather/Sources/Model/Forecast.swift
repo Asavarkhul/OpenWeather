@@ -15,6 +15,8 @@ import Alamofire
 fileprivate let twelvePM = "12"
 fileprivate let nineAM = "9"
 fileprivate let sixAM = "6"
+fileprivate let threeAM = "3"
+fileprivate let midnight = "0"
 
 class Forecast: Object, Mappable {
     // MARK: - Properties
@@ -88,6 +90,10 @@ extension Forecast {
             } else if forecast.hour == nineAM {
                 return forecast
             } else if forecast.hour == sixAM {
+                return forecast
+            } else if forecast.hour == threeAM {
+                return forecast
+            } else if forecast.hour == midnight {
                 return forecast
             }
         }
