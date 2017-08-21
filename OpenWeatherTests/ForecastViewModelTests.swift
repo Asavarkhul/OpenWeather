@@ -54,7 +54,7 @@ class ForecastViewModelTests: XCTestCase {
         }
         
         var forecastSectionEmitted = [[ForecastsSection]]()
-        _ = viewModel.forecasts(for: "20")
+        _ = viewModel.forecasts(for: "21")
             .subscribe(onNext: { value in
                 forecastSectionEmitted.append(value)
                 asyncExpect.fulfill()

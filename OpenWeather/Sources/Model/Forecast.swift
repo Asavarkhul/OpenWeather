@@ -12,10 +12,6 @@ import ObjectMapper
 import RxDataSources
 import Alamofire
 
-fileprivate let twelvePM = "12"
-fileprivate let nineAM = "9"
-fileprivate let sixAM = "6"
-
 class Forecast: Object, Mappable {
     // MARK: - Properties
     dynamic var comment: String = ""
@@ -66,31 +62,63 @@ extension Forecast {
     
     static func filterFromTomorrow(_ forecasts: [Forecast]) -> [Forecast]? {
         var localForecasts: [Forecast] = []
+        
         forecasts.forEach { forecast -> Void in
-            if !localForecasts.contains(where: { $0.day == forecast.day }) {
-                guard let mostExplicitForecast = forecast.mostExplicit() else {
-                    return
+            guard let tomorrow = Day.tomorrowMinusCurrentHour(), let date = forecast.date else { return }
+            if date >= tomorrow {
+                localForecasts.append(forecast)
+            }
+        }
+        
+        var days = [Int]()
+        localForecasts.forEach { forecast -> Void in
+            if forecast.day != "" {
+                guard let day = Int(forecast.day) else { return }
+                days.append(day)
+            }
+        }
+        
+        let sortedDays = days.sorted()
+        let duplicates = Array(Set(sortedDays.filter({ (i: Int) in sortedDays.filter({ $0 == i }).count > 1})))
+        
+        var tempForecasts = [Forecast]()
+        duplicates.forEach { day in
+            forecasts.forEach { forecast in
+                if forecast.day == day.description {
+                    tempForecasts.append(forecast)
                 }
-                localForecasts.append(mostExplicitForecast)
             }
         }
-        return localForecasts
-    }
-    
-    fileprivate func mostExplicit() -> Forecast? {
-        let forecast = self
-        guard let tomorrow = Day.tomorrowMinusCurrentHour(), let date = forecast.date else {
-            return nil
-        }
-        if date >= tomorrow {
-            if forecast.hour == twelvePM {
-                return forecast
-            } else if forecast.hour == nineAM {
-                return forecast
-            } else if forecast.hour == sixAM {
-                return forecast
+        
+        var maxForecastHour = [Forecast]()
+        duplicates.forEach { day in
+            var tempForecastss = [Forecast]()
+            tempForecasts.forEach { forecast in
+                if forecast.day == day.description {
+                    tempForecastss.append(forecast)
+                }
             }
+            
+            let tempForecastsSorted = tempForecastss.sorted(by: { $0.day < $1.day })
+
+            var forecastsInRange = [Forecast]()
+            tempForecastsSorted.forEach { forecast in
+                guard let hour = Int(forecast.hour) else { return }
+                if 0...12 ~= hour {
+                    forecastsInRange.append(forecast)
+                }
+            }
+            
+            guard let max = forecastsInRange.max(by: { forecastOne, forecastTwo -> Bool in
+                guard let dateOne = forecastOne.date else { return false }
+                guard let dateTwo = forecastTwo.date else { return false }
+                return dateOne < dateTwo
+            }) else {
+                return
+            }
+            
+            maxForecastHour.append(max)
         }
-        return nil
+        return maxForecastHour
     }
 }
