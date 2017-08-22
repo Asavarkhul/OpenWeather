@@ -119,6 +119,7 @@ extension Forecast {
             
             mostExplicitForecasts.append(maxForecastInRange)
         }
-        return mostExplicitForecasts
+        let sortedExplicitsForecasts = mostExplicitForecasts.sorted(by: { $0.day < $1.day })
+        return sortedExplicitsForecasts
     }
 }
