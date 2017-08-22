@@ -61,37 +61,18 @@ extension Forecast {
     }
     
     static func filterFromTomorrow(_ forecasts: [Forecast]) -> [Forecast]? {
-        var localForecasts: [Forecast] = []
-        
-        forecasts.forEach { forecast -> Void in
-            guard let tomorrow = Day.tomorrowMinusCurrentHour(), let date = forecast.date else { return }
-            if date >= tomorrow {
-                localForecasts.append(forecast)
-            }
-        }
-        
-        var days = [Int]()
-        localForecasts.forEach { forecast -> Void in
-            if forecast.day != "" {
-                guard let day = Int(forecast.day) else { return }
-                days.append(day)
-            }
-        }
-        
-        let sortedDays = days.sorted()
+        let localForecasts = filter(forecasts, after: Day.tomorrowMinusCurrentHour()!)
+        let sortedDays = daysFrom(localForecasts).sorted()
         let duplicatesDays = Array(Set(sortedDays.filter({ (i: Int) in sortedDays.filter({ $0 == i }).count > 1})))
-        
-        var correspondingsDaysForecastFromDuplicates = [Forecast]()
-        duplicatesDays.forEach { day in
-            forecasts.forEach { forecast in
-                if forecast.day == day.description {
-                    correspondingsDaysForecastFromDuplicates.append(forecast)
-                }
-            }
-        }
-        
+        let correspondingsDaysForecastFromDuplicates = correspondingDays(between: forecasts, and: duplicatesDays)
+        let mostExplicitForecasts = mostExplicitForecastsFor(duplicatesDays, correspondingWith: correspondingsDaysForecastFromDuplicates)
+        return mostExplicitForecasts
+    }
+    
+    fileprivate static func mostExplicitForecastsFor(_ days: [Int], correspondingWith correspondingsDaysForecastFromDuplicates: [Forecast]) -> [Forecast] {
         var mostExplicitForecasts = [Forecast]()
-        duplicatesDays.forEach { day in
+        
+        days.forEach { day in
             var correspondingDaysForecasts = [Forecast]()
             correspondingsDaysForecastFromDuplicates.forEach { forecast in
                 if forecast.day == day.description {
@@ -100,7 +81,7 @@ extension Forecast {
             }
             
             let sortedForecasts = correspondingDaysForecasts.sorted(by: { $0.day < $1.day })
-
+            
             var forecastsInRange = [Forecast]()
             sortedForecasts.forEach { forecast in
                 guard let hour = Int(forecast.hour) else { return }
@@ -121,5 +102,39 @@ extension Forecast {
         }
         let sortedExplicitsForecasts = mostExplicitForecasts.sorted(by: { $0.day < $1.day })
         return sortedExplicitsForecasts
+    }
+    
+    fileprivate static func correspondingDays(between forecasts: [Forecast], and duplicatesDays: [Int]) -> [Forecast] {
+        var correspondingsDaysForecastFromDuplicates = [Forecast]()
+        duplicatesDays.forEach { day in
+            forecasts.forEach { forecast in
+                if forecast.day == day.description {
+                    correspondingsDaysForecastFromDuplicates.append(forecast)
+                }
+            }
+        }
+        return correspondingsDaysForecastFromDuplicates
+    }
+    
+    fileprivate static func daysFrom(_ forecasts: [Forecast]) -> [Int] {
+        var days = [Int]()
+        forecasts.forEach { forecast -> Void in
+            if forecast.day != "" {
+                guard let day = Int(forecast.day) else { return }
+                days.append(day)
+            }
+        }
+        return days
+    }
+    
+    fileprivate static func filter(_ forecasts: [Forecast], after day: Date) -> [Forecast] {
+        var filteredForecasts: [Forecast] = []
+        forecasts.forEach { forecast -> Void in
+            guard let tomorrow = Day.tomorrowMinusCurrentHour(), let date = forecast.date else { return }
+            if date >= tomorrow {
+                filteredForecasts.append(forecast)
+            }
+        }
+        return filteredForecasts
     }
 }
